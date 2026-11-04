@@ -1,0 +1,25 @@
+Fotos reales de kits, organizadas por cliente (zoetis/, cbre/, burger-king/).
+
+Cada carpeta tiene 3 fotos ya optimizadas para web (.jpg, redimensionadas a
+máx. 1400px y comprimidas — de ~2.5MB a 40-225KB cada una). Los PNG originales
+a resolución completa se quedan al lado por si hacen falta para impresión u
+otro uso, pero la web solo referencia los .jpg.
+
+Dónde está cada foto en la web:
+- Carrusel del hero (3 slides, una por cliente): caja/kit abierto con el
+  contenido a la vista. <figure class="slide"><img src="fotos/..."></figure>
+- Galería "Algunos kits" (3 huecos: 1 grande + 2 pequeños): la foto de varias
+  cajas/bolsas apiladas de cada cliente.
+
+Si añades una cuarta marca para el carrusel, añade su <figure class="slide">
++ su <button class="dot"> correspondiente (tienen que ir a la par). Mismo
+recorte para las dos cosas: 2:3 en el carrusel, 4:5 en la galería.
+
+Pendiente: el año de cada campaña va como "[Año]" en el HTML — sustituir por
+el año real cuando se sepa (búscalo con grep "[Año]" en el archivo).
+
+bk-collage-original.png (dentro de burger-king/) es el archivo que llegó
+primero, con las 3 fotos ya montadas en una sola imagen — se recortó en tres
+(bk-caja-cerrada, bk-caja-abierta, bk-cajas-apiladas) para poder usarlas por
+separado. Se queda ahí por si el recorte automático no coincide exactamente
+con el original y hay que rehacerlo a mano.

@@ -1,0 +1,176 @@
+<title>Paletas Oh my Kit</title>
+<style>
+  *{box-sizing:border-box;}
+  body{ margin:0; background:#F5F1EA; color:#2E2A26; font-family:'Karla', system-ui, -apple-system, sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2{ font-family:'Yeseva One', Georgia, serif; text-wrap:balance; }
+  p{ text-wrap:pretty; }
+
+  .wrap{ max-width:900px; margin-inline:auto; padding-inline:clamp(20px,5vw,32px); }
+
+  .intro{ padding-block:clamp(48px,7vw,72px) clamp(32px,5vw,48px); border-bottom:1.5px dashed #D8CFC2; }
+  .intro .kicker{ font-weight:700; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:#8A5A2E; margin-bottom:14px; }
+  .intro h1{ font-size:clamp(28px,4vw,40px); font-weight:400; margin:0 0 14px; }
+  .intro p{ font-size:16px; line-height:1.6; color:#5B5346; max-width:60ch; margin:0; }
+
+  .variant{ padding-block:clamp(56px,8vw,88px); border-bottom:1.5px dashed rgba(0,0,0,0.08); background:var(--bg); color:var(--ink); }
+  .variant:last-of-type{ border-bottom:none; }
+
+  .v-head{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:28px; }
+  .v-label{ font-weight:700; font-size:13px; letter-spacing:.06em; text-transform:uppercase; }
+  .v-mood{ font-size:13px; opacity:.62; font-style:italic; }
+
+  .swatches{ display:flex; gap:10px; margin-bottom:28px; flex-wrap:wrap; }
+  .swatch{ display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .swatch i{ display:block; width:34px; height:34px; border-radius:8px; box-shadow:inset 0 0 0 1px rgba(0,0,0,0.08); }
+  .swatch span{ font-family:ui-monospace, 'SF Mono', Consolas, monospace; font-size:10px; opacity:.6; }
+
+  .tag{ position:relative; display:inline-flex; align-items:center; gap:8px; background:var(--card); border:1.5px dashed var(--ink); border-radius:6px; padding:8px 16px 8px 24px; font-weight:700; font-size:12.5px; transform:rotate(-1.5deg); margin-bottom:20px; }
+  .tag .hole{ position:absolute; left:8px; top:50%; transform:translateY(-50%); width:5px; height:5px; border-radius:50%; background:var(--bg); border:1.5px solid var(--ink); }
+
+  .variant h2{ font-size:clamp(26px,3.6vw,38px); line-height:1.16; margin:0 0 16px; font-weight:400; max-width:19ch; }
+  .variant .sub{ font-size:clamp(15.5px,1.5vw,17.5px); line-height:1.62; opacity:.74; max-width:56ch; margin:0 0 28px; }
+
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; }
+
+  .btn{
+    --notch:10px;
+    position:relative; display:inline-flex; align-items:center; justify-content:center;
+    font-family:'Karla',sans-serif; font-weight:700; font-size:14.5px; text-decoration:none; cursor:pointer;
+    border:1.5px solid var(--ink); padding:14px 26px;
+    clip-path: polygon(var(--notch) 0, 100% 0, 100% calc(100% - var(--notch)), calc(100% - var(--notch)) 100%, 0 100%, 0 var(--notch));
+    box-shadow: 3.5px 3.5px 0 0 var(--ink);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .btn:hover{ transform:translate(2px,2px); box-shadow:1.5px 1.5px 0 0 var(--ink); }
+  .btn-primary{ background:var(--accent); color:var(--btn-text); }
+  .btn-outline{ background:transparent; color:var(--ink); }
+  .btn-outline:hover{ background:var(--ink); color:var(--bg); }
+
+  .closing{ padding-block:clamp(40px,6vw,64px); text-align:center; }
+  .closing p{ font-size:14px; color:#7A6B54; margin:0; }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Karla:wght@400;500;600;700&display=swap">
+
+<section class="intro">
+  <div class="wrap">
+    <div class="kicker">Oh my Kit — ronda 2, familia otoñal</div>
+    <h1>5 paletas naranja y marrón, sobre la línea editorial</h1>
+    <p>Partiendo del tono que más te gustó (premium, contenido, de confianza), aquí tienes cinco combinaciones de naranja y marrón otoñal — de más elegante a más gourmet. Mismo botón, mismo tono editorial, distinto carácter en cada una.</p>
+  </div>
+</section>
+
+<section class="variant" style="--bg:#F5EEE3; --ink:#2B211A; --card:#FFFFFF; --accent:#8F3F16; --btn-text:#F5EEE3;">
+  <div class="wrap">
+    <div class="v-head">
+      <div class="v-label">B1 · Coñac y tinta</div>
+      <div class="v-mood">cuero, confianza, refinado</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch"><i style="background:#8F3F16;"></i><span>#8F3F16</span></div>
+      <div class="swatch"><i style="background:#B5541F;"></i><span>#B5541F</span></div>
+      <div class="swatch"><i style="background:#8C5A34;"></i><span>#8C5A34</span></div>
+      <div class="swatch"><i style="background:#2B211A;"></i><span>#2B211A</span></div>
+    </div>
+    <span class="tag"><span class="hole"></span>Un proyecto, un equipo, un kit</span>
+    <h2>El kit que necesita tu marca. Una vez. Bien hecho.</h2>
+    <p class="sub">Trabajamos codo con codo con tu equipo de eventos o marketing para crear el pack exacto de tu próxima campaña, de principio a fin.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary">Cuéntanos tu proyecto</a>
+      <a class="btn btn-outline">Ver cómo trabajamos</a>
+    </div>
+  </div>
+</section>
+
+<section class="variant" style="--bg:#F6EFE4; --ink:#2E2A1F; --card:#FFFFFF; --accent:#984A22; --btn-text:#F6EFE4;">
+  <div class="wrap">
+    <div class="v-head">
+      <div class="v-label">B2 · Terracota y musgo</div>
+      <div class="v-mood">con los pies en el suelo</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch"><i style="background:#984A22;"></i><span>#984A22</span></div>
+      <div class="swatch"><i style="background:#C1602E;"></i><span>#C1602E</span></div>
+      <div class="swatch"><i style="background:#6B7350;"></i><span>#6B7350</span></div>
+      <div class="swatch"><i style="background:#2E2A1F;"></i><span>#2E2A1F</span></div>
+    </div>
+    <span class="tag"><span class="hole"></span>Diseño a medida, con criterio</span>
+    <h2>Un kit con criterio. No uno elegido de catálogo.</h2>
+    <p class="sub">Cada pack se diseña desde cero para tu marca: el contenido, los acabados y el packaging responden a tu evento, no a un almacén.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary">Cuéntanos tu proyecto</a>
+      <a class="btn btn-outline">Ver cómo trabajamos</a>
+    </div>
+  </div>
+</section>
+
+<section class="variant" style="--bg:#F7EEDF; --ink:#3B2418; --card:#FFFFFF; --accent:#5C3A25; --btn-text:#F7EEDF;">
+  <div class="wrap">
+    <div class="v-head">
+      <div class="v-label">B3 · Calabaza y chocolate</div>
+      <div class="v-mood">gourmet, con carácter</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch"><i style="background:#5C3A25;"></i><span>#5C3A25</span></div>
+      <div class="swatch"><i style="background:#D97B2E;"></i><span>#D97B2E</span></div>
+      <div class="swatch"><i style="background:#A85D1E;"></i><span>#A85D1E</span></div>
+      <div class="swatch"><i style="background:#3B2418;"></i><span>#3B2418</span></div>
+    </div>
+    <span class="tag"><span class="hole"></span>Un kit con carácter, no de catálogo</span>
+    <h2>El kit que se nota que alguien ha pensado. Porque lo ha hecho.</h2>
+    <p class="sub">Diseñamos y montamos a mano cada pack para tu campaña o evento — con el cuidado de quien cuida cada detalle, no de quien rellena una caja.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary">Cuéntanos tu proyecto</a>
+      <a class="btn btn-outline">Ver cómo trabajamos</a>
+    </div>
+  </div>
+</section>
+
+<section class="variant" style="--bg:#F3EAE0; --ink:#2E2621; --card:#FFFFFF; --accent:#7C3216; --btn-text:#F3EAE0;">
+  <div class="wrap">
+    <div class="v-head">
+      <div class="v-label">B4 · Óxido y arena</div>
+      <div class="v-mood">oficio, tacto, material</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch"><i style="background:#7C3216;"></i><span>#7C3216</span></div>
+      <div class="swatch"><i style="background:#A6461F;"></i><span>#A6461F</span></div>
+      <div class="swatch"><i style="background:#C9A876;"></i><span>#C9A876</span></div>
+      <div class="swatch"><i style="background:#2E2621;"></i><span>#2E2621</span></div>
+    </div>
+    <span class="tag"><span class="hole"></span>Hecho a mano, pensado para durar</span>
+    <h2>Un kit con oficio. El tuyo, no uno cualquiera.</h2>
+    <p class="sub">Del brief al montaje final, cuidamos cada pieza del kit como si fuera la única — porque lo es, para tu evento.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary">Cuéntanos tu proyecto</a>
+      <a class="btn btn-outline">Ver cómo trabajamos</a>
+    </div>
+  </div>
+</section>
+
+<section class="variant" style="--bg:#F5EFE6; --ink:#2F2620; --card:#FFFFFF; --accent:#6B4A34; --btn-text:#F5EFE6;">
+  <div class="wrap">
+    <div class="v-head">
+      <div class="v-label">B5 · Ámbar y nuez</div>
+      <div class="v-mood">cálido, acogedor, hora dorada</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch"><i style="background:#6B4A34;"></i><span>#6B4A34</span></div>
+      <div class="swatch"><i style="background:#C97A2A;"></i><span>#C97A2A</span></div>
+      <div class="swatch"><i style="background:#E0A050;"></i><span>#E0A050</span></div>
+      <div class="swatch"><i style="background:#2F2620;"></i><span>#2F2620</span></div>
+    </div>
+    <span class="tag"><span class="hole"></span>El kit que se siente hecho para ti</span>
+    <h2>Un kit con calidez. El de tu marca, no el de un catálogo.</h2>
+    <p class="sub">Diseñamos y montamos a mano el pack de tu próxima campaña o evento — pensado para que se note que es vuestro, no de nadie más.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary">Cuéntanos tu proyecto</a>
+      <a class="btn btn-outline">Ver cómo trabajamos</a>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <p>Dime cuál te convence (o si quieres mezclar acentos entre dos) y aplico esa dirección a la landing completa.</p>
+  </div>
+</section>

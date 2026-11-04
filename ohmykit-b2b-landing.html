@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oh My Kit B2B</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Gloock&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+  /* ------------------------------------------------------------------
+     PALETA ACTIVA: Rosa empolvado
+     Para cambiar de paleta, sustituye los 24 valores de color de :root
+     por los de cualquiera de las paletas alternativas de abajo.
+     No hace falta tocar nada más: toda la página usa estas variables.
+     ------------------------------------------------------------------ */
+  :root{
+    --paper:#F7EFEA; --paper-deep:#EFDFD8; --label:#FFFAF7;
+    --ink:#3E2A2B; --ink-deep:#2B1B1C; --ink-soft:#7A5F60;
+    --rule:#E0CBC4; --faint:#B5999A; --hatch:#E6D0CA;
+    --field:#DDA7A2; --on-field:#2B1B1C; --on-field-soft:#6E4747;
+    --accent:#93453F;
+    --btn-face:#5E3B3C; --btn-text:#F7EFEA; --btn-shadow:#DDA7A2; --btn-shadow-field:#2B1B1C;
+    --dark:#4A3032; --dark-rule:#664A4C; --on-dark:#E3CFCC; --dark-accent:#EDB5AF;
+    --darkest:#2B1B1C; --darkest-rule:#463234; --darkest-muted:#BFA3A3;
+
+    /* Tipografías. Para cambiar la de titulares basta con sustituir estas
+       cuatro variables (escala, espaciado y peso se ajustan por tipografía). */
+    --serif:'Gloock', 'Times New Roman', Georgia, serif;
+    --display-scale:1; --display-track:-.01em; --display-weight:400;
+    --sans:'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --mono:'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    --cut:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+  }
+
+  /* --- PALETAS ALTERNATIVAS (probadas y validadas en contraste) ---------
+
+  Lacre (rojo de sello sobre lino)
+    --paper:#F3EADB; --paper-deep:#E9DAC3; --label:#FBF6EC;
+    --ink:#33201A; --ink-deep:#22140F; --ink-soft:#6F564A;
+    --rule:#D8C5AB; --faint:#A8907A; --hatch:#DDC8AC;
+    --field:#9E2F28; --on-field:#FBF1E6; --on-field-soft:#E9BFB5;
+    --accent:#9E2F28;
+    --btn-face:#33201A; --btn-text:#F3EADB; --btn-shadow:#9E2F28; --btn-shadow-field:#F3EADB;
+    --dark:#33201A; --dark-rule:#54392E; --on-dark:#D8C4B2; --dark-accent:#E07A6B;
+    --darkest:#22140F; --darkest-rule:#3E2A22; --darkest-muted:#B39C8C;
+
+  Kraft y cereza (papel kraft con acentos rojo cereza)
+    --paper:#F4EEE6; --paper-deep:#E8DCCB; --label:#FBF7F1;
+    --ink:#2E231C; --ink-deep:#1F1712; --ink-soft:#6B5A4C;
+    --rule:#D6C7B3; --faint:#A8957F; --hatch:#DDCDB6;
+    --field:#C49A6C; --on-field:#1F1712; --on-field-soft:#5A4330;
+    --accent:#A32E3A;
+    --btn-face:#A32E3A; --btn-text:#FBF7F1; --btn-shadow:#2E231C; --btn-shadow-field:#1F1712;
+    --dark:#2E231C; --dark-rule:#4B3D32; --on-dark:#D8CBBB; --dark-accent:#E0707A;
+    --darkest:#1F1712; --darkest-rule:#3A2E25; --darkest-muted:#AE9D8B;
+
+  Miel y lino (ocre miel sobre lino natural)
+    --paper:#F5EFE3; --paper-deep:#EBE1CD; --label:#FCF8F0;
+    --ink:#33291B; --ink-deep:#221B10; --ink-soft:#6E614B;
+    --rule:#D9CCB2; --faint:#ADA084; --hatch:#E0D3B8;
+    --field:#D9A441; --on-field:#221B10; --on-field-soft:#5E4A1C;
+    --accent:#7D5A10;
+    --btn-face:#4A3B24; --btn-text:#F5EFE3; --btn-shadow:#D9A441; --btn-shadow-field:#221B10;
+    --dark:#3A2F1F; --dark-rule:#574A35; --on-dark:#DDD1BA; --dark-accent:#E3B458;
+    --darkest:#221B10; --darkest-rule:#3F3424; --darkest-muted:#B3A68B;
+
+  Calabaza y chocolate
+    --paper:#F7EEDF; --paper-deep:#F1E2CB; --label:#FBF6EE;
+    --ink:#3B2418; --ink-deep:#2A170E; --ink-soft:#7C5A44;
+    --rule:#DCC7AE; --faint:#B09378; --hatch:#E6D2B8;
+    --field:#D97B2E; --on-field:#2A170E; --on-field-soft:#6E3D17;
+    --accent:#A85D1E;
+    --btn-face:#5C3A25; --btn-text:#F7EEDF; --btn-shadow:#D97B2E; --btn-shadow-field:#2A170E;
+    --dark:#3B2418; --dark-rule:#5A4032; --on-dark:#D9C3AE; --dark-accent:#D97B2E;
+    --darkest:#2A170E; --darkest-rule:#4A3226; --darkest-muted:#B89C84;
+
+  --- TIPOGRAFÍAS DE TITULAR ALTERNATIVAS (recuerda añadirlas al <link> de Google Fonts) ---
+
+  Young Serif  --serif:'Young Serif', Georgia, serif;        --display-scale:1;    --display-track:-.015em; --display-weight:400;
+  Newsreader   --serif:'Newsreader', Georgia, serif;         --display-scale:1.03; --display-track:-.01em;  --display-weight:500;
+  Bricolage    --serif:'Bricolage Grotesque', sans-serif;    --display-scale:.98;  --display-track:-.025em; --display-weight:600;
+  Zilla Slab   --serif:'Zilla Slab', Georgia, serif;         --display-scale:1;    --display-track:-.01em;  --display-weight:500;
+  Alegreya     --serif:'Alegreya', Georgia, serif;           --display-scale:1.06; --display-track:-.005em; --display-weight:500;
+
+  --------------------------------------------------------------------- */
+
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  @media (prefers-reduced-motion: no-preference){ html{ scroll-behavior:smooth; } }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.logo,.brand,.label-title,.work-item .t,.story blockquote{ font-family:var(--serif); font-weight:var(--display-weight); letter-spacing:var(--display-track); }
+  h1,h2,h3{ margin:0; text-wrap:balance; }
+  p{ margin:0; text-wrap:pretty; }
+  ul,ol{ list-style:none; margin:0; padding:0; }
+  a{ color:inherit; }
+  section[id]{ scroll-margin-top:76px; }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+  .wrap{ max-width:1160px; margin-inline:auto; padding-inline:clamp(20px,5vw,32px); }
+
+  .btn{ --shadow:var(--btn-shadow); position:relative; display:inline-block; text-decoration:none; isolation:isolate; cursor:pointer; border:0; padding:0; background:none; font:inherit; }
+  .btn::before{ content:""; position:absolute; inset:0; transform:translate(5px,5px); background:var(--shadow); clip-path:var(--cut); z-index:-1; }
+  .btn > span{ display:block; padding:15px 28px; background:var(--btn-face); color:var(--btn-text); clip-path:var(--cut); font-family:var(--sans); font-weight:600; font-size:15.5px; letter-spacing:.01em; line-height:1.2; transition:transform .12s ease; }
+  .btn:hover > span{ transform:translate(2px,2px); }
+  .btn:active > span{ transform:translate(5px,5px); }
+  .btn.small > span{ padding:10px 18px; font-size:14px; }
+  @media (prefers-reduced-motion: reduce){ .btn > span{ transition:none; } }
+
+  .text-link{ font-weight:600; text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:5px; }
+  .text-link:hover{ color:var(--accent); }
+
+  header{ position:sticky; top:0; z-index:20; background:var(--paper); border-bottom:1px solid var(--rule); }
+  .bar{ display:flex; align-items:center; gap:clamp(16px,4vw,48px); padding-block:14px; }
+  .logo{ font-family:var(--serif); font-size:23px; text-decoration:none; margin-right:auto; }
+  .nav{ display:flex; gap:clamp(18px,3vw,32px); font-size:15px; font-weight:500; }
+  .nav a{ text-decoration:none; }
+  .nav a:hover{ color:var(--accent); }
+
+  .hero{ display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); border-bottom:1px solid var(--rule); }
+  .hero-text{ display:flex; flex-direction:column; justify-content:center; gap:28px; padding-block:clamp(56px,8vw,112px); padding-left:max(clamp(20px,5vw,32px), calc((100vw - 1160px) / 2 + 32px)); padding-right:clamp(24px,4vw,64px); }
+  .hero h1{ font-size:calc(clamp(46px,6.4vw,90px) * var(--display-scale)); line-height:.98; max-width:9.5em; }
+  .lede{ font-size:clamp(17px,1.5vw,19px); color:var(--ink-soft); max-width:44ch; }
+  .actions{ display:flex; align-items:center; gap:28px; flex-wrap:wrap; }
+
+  .hero-field{ background:var(--field); color:var(--on-field); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:clamp(40px,6vw,80px) clamp(20px,5vw,64px); }
+  /* --- Carrusel del hero -------------------------------------------------
+     Para poner fotos reales: sustituye el <div class="ph">…</div> de cada
+     .slide por <img src="fotos/loquesea.jpg" alt="…">. El CSS ya trata las
+     dos cosas igual (mismo recorte 2:3, más vertical que antes, sin llegar
+     a la proporción de una pantalla de móvil real). Añadir o quitar slides
+     no requiere tocar el JS, pero sí añadir o quitar su punto en .dots.
+     ---------------------------------------------------------------------- */
+  .carousel{ width:100%; max-width:380px; display:flex; flex-direction:column; gap:18px; }
+  .frame{ overflow:hidden; clip-path:var(--cut); box-shadow:0 30px 50px -22px rgba(25,12,8,.55); }
+  .track{ display:flex; transition:transform .65s cubic-bezier(.4,0,.2,1); }
+  .slide{ min-width:100%; margin:0; background:var(--label); color:var(--ink); }
+  .slide img, .slide .ph{ display:block; width:100%; aspect-ratio:2/3; object-fit:cover; }
+  .slide .ph{ display:flex; align-items:center; justify-content:center; gap:clamp(10px,3vw,22px);
+    background:repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 13px), var(--paper-deep); }
+  .slide .ph span{ font-size:clamp(34px,6vw,52px); line-height:1; }
+  .slide .ph span:nth-child(2){ font-size:clamp(44px,7.5vw,68px); }
+  .slide figcaption{ display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+    padding:12px 16px; border-top:1.5px solid var(--ink); font-family:var(--mono); font-size:11.5px;
+    letter-spacing:.07em; text-transform:uppercase; }
+  .slide figcaption em{ font-style:normal; color:var(--ink-soft); }
+  .car-ctrl{ display:flex; align-items:center; justify-content:center; gap:20px; }
+  .dots{ display:flex; gap:9px; }
+  .dot{ width:8px; height:8px; padding:0; border:0; cursor:pointer; background:var(--on-field-soft); opacity:.45;
+    clip-path:polygon(2px 0,100% 0,100% calc(100% - 2px),calc(100% - 2px) 100%,0 100%,0 2px); transition:opacity .2s; }
+  .dot[aria-current="true"]{ background:var(--on-field); opacity:1; }
+  .arrow{ width:34px; height:34px; display:grid; place-items:center; padding:0; cursor:pointer;
+    background:none; border:1.5px solid var(--on-field); color:var(--on-field);
+    clip-path:polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px); transition:background .2s,color .2s; }
+  .arrow:hover{ background:var(--on-field); color:var(--field); }
+  .arrow svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+  @media (prefers-reduced-motion: reduce){ .track{ transition:none; } }
+
+  .clients{ border-bottom:1px solid var(--rule); padding-block:26px; }
+  .clients .wrap{ display:flex; align-items:center; gap:24px 48px; flex-wrap:wrap; }
+  .clients p{ font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); }
+  .logos{ display:flex; gap:16px 40px; flex-wrap:wrap; font-family:var(--mono); font-size:13px; color:var(--faint); }
+
+  .occasions{ padding-block:clamp(72px,10vw,128px); }
+  .sec-intro{ display:flex; justify-content:space-between; align-items:flex-end; gap:20px 48px; flex-wrap:wrap; margin-bottom:clamp(36px,5vw,56px); }
+  .sec-intro h2{ font-size:calc(clamp(34px,4.4vw,58px) * var(--display-scale)); line-height:1.02; max-width:11em; }
+  .sec-intro p{ color:var(--ink-soft); max-width:36ch; }
+  .index-head{ display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr) minmax(0,.8fr); gap:16px 40px; padding-block:12px; border-top:1.5px solid var(--ink); border-bottom:1px solid var(--rule); }
+  .index-head span{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); }
+  .row{ display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr) minmax(0,.8fr); gap:16px 40px; padding-block:30px; border-bottom:1px solid var(--rule); align-items:baseline; }
+  .row h3{ font-size:clamp(24px,2.5vw,32px); line-height:1.1; }
+  .row p{ color:var(--ink-soft); font-size:16px; }
+  .row .contents{ display:flex; flex-direction:column; gap:9px; font-size:15px; line-height:1.3; }
+  .row .contents .item{ position:relative; padding-left:18px; }
+  .row .contents .item::before{ content:''; position:absolute; left:0; top:.42em; width:7px; height:7px; background:var(--accent);
+    clip-path:polygon(2px 0,100% 0,100% calc(100% - 2px),calc(100% - 2px) 100%,0 100%,0 2px); }
+  .row .contents .k{ display:none; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); }
+
+  /* --- Montaje del kit: animación ligada al scroll -----------------------
+     .build-track es el raíl (alto en vh). Dentro, .build-stage se queda
+     pegada mientras dura. El JS del final del archivo calcula el progreso
+     0→1 y coloca cada pieza. Sin JS o con prefers-reduced-motion se ve el
+     estado inicial: la caja abierta y las piezas alrededor.
+     ---------------------------------------------------------------------- */
+  .build{ background:var(--paper-deep); }
+  .build-track{ position:relative; height:220vh; }  /* sube o baja este valor para alargar o acortar el scroll */
+  .build-stage{ position:sticky; top:0; height:100vh; overflow:hidden;
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+    padding:clamp(60px,9vh,110px) 20px clamp(40px,6vh,72px); }
+  .build-head{ text-align:center; max-width:19em; }
+  .build-head h2{ font-size:calc(clamp(28px,3.6vw,50px) * var(--display-scale)); line-height:1.05; }
+  .build-head p{ color:var(--ink-soft); font-size:16.5px; margin-top:12px; }
+  .stage-box{ position:relative; width:min(290px,48vw); aspect-ratio:64/62; flex:none; margin-block:auto; }
+  .box{ position:absolute; inset:0; width:100%; height:100%; fill:none; stroke:var(--ink);
+    stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .box *{ vector-effect:non-scaling-stroke; }
+  .repeticion{ position:absolute; inset:0; }
+  .repeticion svg{ opacity:0; }
+  .solapa path{ fill:var(--paper-deep); }   /* es cartón: oculta el borde de la caja que queda detrás */
+  .marca{ opacity:0; }
+  .marca text{ fill:var(--ink); stroke:none; font-family:var(--sans); font-weight:400;
+    font-size:2.4px; letter-spacing:.06px; }
+  .piece{ position:absolute; left:50%; top:50%; width:72px; height:72px; margin:-36px 0 0 -36px; }
+  .piece svg{ display:block; width:100%; height:100%; fill:none; stroke:var(--ink); stroke-width:1.5;
+    stroke-linecap:round; stroke-linejoin:round; }
+  .piece svg *{ vector-effect:non-scaling-stroke; }
+  .build.no-anim .build-track{ height:auto; }
+  .build.no-anim .build-stage{ position:static; height:auto; min-height:76vh; }
+
+  .process{ background:var(--dark); color:var(--paper); padding-block:clamp(72px,10vw,128px); }
+  .process-grid{ display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:48px clamp(40px,7vw,96px); align-items:start; }
+  .process-head{ position:sticky; top:110px; display:flex; flex-direction:column; gap:18px; }
+  .process-head h2{ font-size:calc(clamp(34px,4.4vw,58px) * var(--display-scale)); line-height:1.02; }
+  .process-head p{ color:var(--on-dark); max-width:32ch; }
+  .steps li{ display:grid; grid-template-columns:106px minmax(0,1fr); gap:8px 24px; padding-block:34px; border-top:1px solid var(--dark-rule); }
+  .steps li:last-child{ border-bottom:1px solid var(--dark-rule); }
+  .steps .mark{ display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
+  .steps .n{ font-family:var(--serif); font-weight:var(--display-weight); font-size:30px; line-height:1; color:var(--dark-accent); }
+  .steps .ico{ width:88px; height:88px; display:block; overflow:visible; fill:none; stroke:var(--on-dark); stroke-width:1.2; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* --- Iconos del proceso: bucle corto (2.4-2.6s) por icono ------------
+     Cada pieza animada lleva su propia clase (ver comentarios junto a cada
+     <svg class="ico">). Con prefers-reduced-motion se paran todas y se ve
+     el estado "a medias" del dibujo, nunca en blanco. */
+  .ico-escribir .l1, .ico-escribir .l2, .ico-escribir .l3{ stroke-dasharray:24; animation:trazo24 2.4s ease-in-out infinite; }
+  .ico-escribir .l1{ animation-delay:0s; }
+  .ico-escribir .l2{ animation-delay:.3s; }
+  .ico-escribir .l3{ animation-delay:.6s; }
+  @keyframes trazo24{ 0%,15%{ stroke-dashoffset:24; } 35%,92%{ stroke-dashoffset:0; } 100%{ stroke-dashoffset:24; } }
+
+  .ico-plano .bp-net{ stroke-dasharray:190; animation:trazo190 2.6s ease-in-out infinite; }
+  .ico-plano .bp-detalle{ animation:aparece 2.6s ease-in-out infinite; }
+  .ico-plano .bp-check{ transform-origin:45px 45px; animation:sello 2.6s ease-in-out infinite; }
+  @keyframes trazo190{ 0%,8%{ stroke-dashoffset:190; } 46%,78%{ stroke-dashoffset:0; } 100%{ stroke-dashoffset:190; } }
+  @keyframes aparece{ 0%,40%,100%{ opacity:0; } 55%,88%{ opacity:1; } }
+  @keyframes sello{ 0%,58%,100%{ opacity:0; transform:scale(.5); } 68%{ opacity:1; transform:scale(1.12); } 76%,90%{ opacity:1; transform:scale(1); } 96%{ opacity:0; transform:scale(.8); } }
+
+  .ico-montar .pz{ animation:cae-en-caja 2.6s ease-in-out infinite; }
+  .ico-montar .pz1{ animation-delay:0s; transform-origin:21px 9px; }
+  .ico-montar .pz2{ animation-delay:.35s; transform-origin:41px 10px; }
+  .ico-montar .lazo{ transform-origin:32px 28px; animation:lazo-aparece 2.6s ease-in-out infinite; }
+  @keyframes cae-en-caja{ 0%,10%{ transform:translate(0,0) scale(1); opacity:1; } 54%,100%{ transform:var(--destino); opacity:0; } }
+  @keyframes lazo-aparece{ 0%,58%,100%{ opacity:0; transform:scale(.4); } 68%{ opacity:1; transform:scale(1.15); } 76%,96%{ opacity:1; transform:scale(1); } }
+
+  /* Icono 4: varias cajas pequeñas convergen al centro y se funden (se
+     desvanecen justo cuando aparece) en una caja grande con el logo, que
+     tras un momento sale disparada. --salto es el desplazamiento de cada
+     caja mini desde su posición de partida hasta el centro. */
+  .ico-envio .mini{ animation:mini-conv 2.8s ease-in-out infinite; }
+  @keyframes mini-conv{ 0%,18%{ transform:translate(0,0); opacity:1; } 42%{ transform:var(--salto); opacity:1; } 48%,100%{ transform:var(--salto); opacity:0; } }
+
+  .ico-envio .grande{ transform-origin:32px 35px; animation:caja-grande 2.8s ease-in-out infinite; }
+  @keyframes caja-grande{
+    0%,38%{ opacity:0; transform:translate(0,0) scale(.85); }
+    48%{ opacity:1; transform:translate(0,0) scale(1.38); }
+    55%,72%{ opacity:1; transform:translate(0,0) scale(1.25); }
+    88%{ opacity:0; transform:translate(30px,-26px) scale(.75); }
+    100%{ opacity:0; transform:translate(0,0) scale(.85); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .ico-escribir .l1, .ico-escribir .l2, .ico-escribir .l3,
+    .ico-plano .bp-net, .ico-plano .bp-detalle,
+    .ico-plano .bp-check, .ico-montar .pz, .ico-montar .lazo,
+    .ico-envio .mini, .ico-envio .grande{ animation:none; }
+    .ico-escribir .l1, .ico-escribir .l2, .ico-escribir .l3{ stroke-dashoffset:0; }
+    .ico-plano .bp-net{ stroke-dashoffset:0; }
+    .ico-plano .bp-detalle, .ico-plano .bp-check, .ico-montar .lazo{ opacity:1; transform:none; }
+    .ico-montar .pz{ opacity:0; transform:var(--destino); }
+    .ico-envio .mini{ opacity:0; }
+    .ico-envio .grande{ opacity:1; transform:none; }
+  }
+  .steps h3{ font-size:clamp(23px,2.2vw,28px); line-height:1.15; margin-bottom:8px; }
+  .steps p{ color:var(--on-dark); font-size:16.5px; max-width:48ch; }
+
+  .work{ padding-block:clamp(72px,10vw,128px); }
+  .work-grid{ display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:28px; }
+  .work-item{ margin:0; display:flex; flex-direction:column; gap:12px; }
+  .work-item.big{ grid-row:span 2; }
+  .photo{ background:repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 13px), var(--paper-deep); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:12.5px; color:var(--ink-soft); aspect-ratio:4/5; overflow:hidden; }
+  .photo img{ display:block; width:100%; height:100%; object-fit:cover; }
+  .work-item.big .photo{ aspect-ratio:auto; flex:1; min-height:360px; }
+  .work-item figcaption{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; }
+  .work-item .t{ font-family:var(--serif); font-size:21px; }
+  .work-item .m{ font-family:var(--mono); font-size:12.5px; color:var(--ink-soft); }
+
+  .contact{ background:var(--field); color:var(--on-field); padding-block:clamp(72px,10vw,128px); }
+  .contact .btn{ --shadow:var(--btn-shadow-field); }
+  .contact-grid{ display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:48px clamp(40px,7vw,96px); align-items:start; }
+  .contact-intro{ display:flex; flex-direction:column; gap:20px; }
+  .contact h2{ font-size:calc(clamp(36px,4.8vw,64px) * var(--display-scale)); line-height:1; }
+  .contact-intro p{ font-size:17.5px; max-width:36ch; }
+  .direct a{ font-weight:600; text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:5px; }
+  .contact :focus-visible{ outline-color:var(--on-field); }
+
+  .form{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:26px 28px; }
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .field.full{ grid-column:1 / -1; }
+  .field label{ font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; }
+  .field input, .field textarea{ width:100%; background:transparent; border:0; border-bottom:1.5px solid var(--on-field); border-radius:0; padding:8px 0 10px; font-family:var(--sans); font-size:17px; color:var(--on-field); }
+  .field textarea{ resize:vertical; min-height:92px; line-height:1.5; }
+  .field input::placeholder, .field textarea::placeholder{ color:var(--on-field-soft); opacity:1; }
+  .field input:focus, .field textarea:focus{ outline:none; border-bottom-width:3px; padding-bottom:8.5px; }
+  .form-end{ grid-column:1 / -1; margin-top:6px; }
+
+  footer{ background:var(--darkest); color:var(--paper); }
+  .foot-top{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; padding-block:64px 40px; }
+  .foot-top .brand{ font-family:var(--serif); font-size:clamp(40px,6vw,72px); line-height:1; }
+  .foot-top a{ font-size:clamp(18px,2vw,22px); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:6px; }
+  .foot-bottom{ display:flex; justify-content:space-between; gap:12px 24px; flex-wrap:wrap; padding-block:20px 28px; border-top:1px solid var(--darkest-rule); font-family:var(--mono); font-size:12.5px; color:var(--darkest-muted); }
+  .foot-bottom ul{ display:flex; gap:24px; flex-wrap:wrap; }
+  .foot-bottom a{ text-decoration:none; }
+  .foot-bottom a:hover{ color:var(--paper); }
+
+  @media (max-width: 880px){
+    .hero{ grid-template-columns:minmax(0,1fr); }
+    .hero-text{ padding-inline:clamp(20px,5vw,32px); }
+    .row{ grid-template-columns:minmax(0,1fr); gap:10px; }
+    .index-head{ display:none; }
+    .index{ border-top:1.5px solid var(--ink); }
+    .row .contents{ margin-top:10px; }
+    .row .contents .k{ display:block; margin-bottom:1px; }
+    .process-grid, .contact-grid, .work-grid{ grid-template-columns:minmax(0,1fr); }
+    .process-head{ position:static; }
+    .work-item.big{ grid-row:auto; }
+    .work-item.big .photo{ aspect-ratio:4/5; min-height:0; flex:none; }
+    .story blockquote, .story cite{ margin-left:0; }
+  }
+  @media (max-width: 640px){
+    .nav{ display:none; }
+    .steps li{ grid-template-columns:64px minmax(0,1fr); gap:6px 18px; }
+    .steps .ico{ width:56px; height:56px; }
+    .steps .n{ font-size:23px; }
+    .form{ grid-template-columns:minmax(0,1fr); }
+    .piece{ width:56px; height:56px; margin:-28px 0 0 -28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#">Oh My Kit!</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#kits">Kits</a>
+      <a href="#proceso">Cómo trabajamos</a>
+      <a href="#proyectos">Proyectos</a>
+    </nav>
+    <a class="btn small" href="#contacto"><span>Pedir propuesta</span></a>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>El kit que hace decir «oh, my».</h1>
+      <p class="lede">Diseñamos y montamos a mano kits para lanzamientos, ferias, convenciones y campañas de marketing. Cada uno se piensa para una fecha concreta y no se vuelve a repetir.</p>
+      <div class="actions">
+        <a class="btn" href="#contacto"><span>Pedir propuesta</span></a>
+        <a class="text-link" href="#proceso">Ver cómo trabajamos</a>
+      </div>
+    </div>
+    <div class="hero-field">
+      <div class="carousel" aria-roledescription="carrusel" aria-label="Kits de ejemplo">
+        <div class="frame">
+          <div class="track">
+          <figure class="slide">
+            <img src="fotos/zoetis/zoetis-caja-abierta.jpg" alt="Kit «Vamos, Go!» de Zoetis: libreta, neceser, copa y botella de cava sobre virutas de papel">
+            <figcaption><span>Campaña «Vamos, Go!»</span><em>Zoetis · [Año]</em></figcaption>
+          </figure>
+          <figure class="slide">
+            <img src="fotos/cbre/cbre-kit-reencuentro.jpg" alt="Kit «Por fin nos reencontramos» de CBRE: bolsa de tela, gel, bote de chuches y tarjeta">
+            <figcaption><span>Kit «Por fin nos reencontramos»</span><em>CBRE · [Año]</em></figcaption>
+          </figure>
+          <figure class="slide">
+            <img src="fotos/burger-king/bk-caja-abierta.jpg" alt="Kit promocional de Burger King: camiseta, libreta, calcetines, bolígrafo y donuts">
+            <figcaption><span>Kit promocional</span><em>Burger King · [Año]</em></figcaption>
+          </figure>
+          </div>
+        </div>
+        <div class="car-ctrl">
+          <button class="arrow prev" type="button" aria-label="Imagen anterior">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19"/></svg>
+          </button>
+          <div class="dots">
+            <button class="dot" type="button" aria-label="Ir a la imagen 1"></button>
+            <button class="dot" type="button" aria-label="Ir a la imagen 2"></button>
+            <button class="dot" type="button" aria-label="Ir a la imagen 3"></button>
+          </div>
+          <button class="arrow next" type="button" aria-label="Imagen siguiente">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 L16 12 L9 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="clients" aria-label="Clientes">
+    <div class="wrap">
+      <p>Han confiado en nosotros</p>
+      <ul class="logos">
+        <li>[LOGO]</li><li>[LOGO]</li><li>[LOGO]</li><li>[LOGO]</li><li>[LOGO]</li><li>[LOGO]</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="occasions" id="kits">
+    <div class="wrap">
+      <div class="sec-intro">
+        <h2>Kits con fecha en el calendario</h2>
+        <p>Cada kit nace de un momento concreto de tu empresa.</p>
+      </div>
+      <div class="index-head"><span>Ocasión</span><span>Qué es</span><span>Suele llevar</span></div>
+      <ul class="index">
+        <li class="row">
+          <h3>Lanzamientos y presentaciones</h3>
+          <p>Para prensa, clientes o tu propio equipo. El kit presenta la esencia de tu producto antes de que nadie lo haya probado.</p>
+          <div class="contents"><span class="k">Suele llevar</span><span class="item">Caja rígida</span><span class="item">Muestra de producto</span><span class="item">Carta de presentación</span></div>
+        </li>
+        <li class="row">
+          <h3>Ferias y congresos</h3>
+          <p>Lo que la gente se lleva de tu stand, y lo que hace que se acuerden de vosotros al volver a la oficina.</p>
+          <div class="contents"><span class="k">Suele llevar</span><span class="item">Bolsa de tela</span><span class="item">Algo rico para picar</span><span class="item">Tarjeta con QR</span></div>
+        </li>
+        <li class="row">
+          <h3>Campañas de marketing</h3>
+          <p>Envíos físicos a clientes o prospects que acompañan una campaña. Llegan a la mesa, no a la bandeja de spam.</p>
+          <div class="contents"><span class="k">Suele llevar</span><span class="item">Caja de envío</span><span class="item">Producto protagonista</span><span class="item">Mensaje de campaña</span></div>
+        </li>
+        <li class="row">
+          <h3>Welcome packs</h3>
+          <p>Para una incorporación, un cliente nuevo o un partner con el que empezáis a trabajar.</p>
+          <div class="contents"><span class="k">Suele llevar</span><span class="item">Caja</span><span class="item">Taza</span><span class="item">Libreta</span><span class="item">Nota de bienvenida</span></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="build" aria-label="Cómo se llena un kit">
+    <div class="build-track">
+      <div class="build-stage">
+        <div class="build-head">
+          <h2>Lo bueno de un kit se elige antes de cerrar la caja.</h2>
+          <p>Cada pieza se elige para una ocasión concreta.</p>
+        </div>
+        <div class="stage-box">
+          <svg class="box" viewBox="0 -10 64 62" aria-hidden="true">
+            <path d="M10 30 L10 38 L32 47 L54 38 L54 30"/>
+            <path d="M32 39 L32 47"/>
+            <path d="M32 21 L54 30 L32 39 L10 30 Z"/>
+            <!-- La solapa la dibuja el JS: gira sobre la arista trasera derecha. -->
+            <g class="solapa"><path class="solapa-cara"/><path class="solapa-canto"/></g>
+            <!-- Logo sobre la cara frontal derecha. La matriz lleva los ejes de
+                 esa cara en unidades de caja, así que el texto sale escorzado
+                 pero sin deformarse: 1 unidad mide lo mismo en los dos ejes. -->
+            <g class="marca"><text transform="matrix(.9167 -.375 0 1 32 39)" x="12" y="5.1" text-anchor="middle" textLength="7" lengthAdjust="spacing">OMK!</text></g>
+          </svg>
+          <div class="piece" aria-hidden="true"><svg viewBox="0 0 48 48">
+            <path d="M13 15 L15 38 Q15.3 41 18 41 L30 41 Q32.7 41 33 38 L35 15"/>
+            <ellipse cx="24" cy="15" rx="11" ry="3.6"/>
+            <ellipse cx="24" cy="15" rx="7.6" ry="2.3" fill="var(--accent)"/>
+            <path d="M35 20 Q41.5 21 41 26 Q40.5 31 34 31.5"/>
+            <ellipse cx="24" cy="43" rx="15" ry="2.6"/>
+            <path d="M19 11 Q17 7.5 19.3 5"/>
+            <path d="M27 11 Q28.8 7.5 26.7 5"/>
+          </svg></div>
+          <div class="piece" aria-hidden="true"><svg viewBox="0 0 48 48">
+            <path d="M14 8 L31 8 L35 12 L35 40 L14 40 Z"/>
+            <path d="M19 8 L19 40"/>
+            <path d="M23 17 L31.5 17 M23 22.5 L31.5 22.5 M23 28 L28.5 28"/>
+            <rect x="32" y="20" width="3.2" height="7" rx="1.2" fill="var(--accent)"/>
+          </svg></div>
+          <div class="piece" aria-hidden="true"><svg viewBox="0 0 48 48">
+            <path d="M12 14 L36 14 L36 36 L12 36 Z"/>
+            <path d="M20 14 L20 36 M28 14 L28 36 M12 21.3 L36 21.3 M12 28.6 L36 28.6"/>
+            <path d="M12 14 L12 8 L18 14 Z" fill="var(--accent)"/>
+          </svg></div>
+          <div class="piece" aria-hidden="true"><svg viewBox="0 0 48 48">
+            <path d="M15 37 L19.5 26 L33 12.5 L37 16.5 L23.5 30 Z"/>
+            <path d="M19.5 26 L23.5 30"/>
+            <path d="M33 12.5 L37 16.5"/>
+            <path d="M15 37 L17 31.7 L20.3 35 Z" fill="var(--accent)"/>
+            <path d="M31.4 14.1 L34.5 17.6"/>
+          </svg></div>
+          <div class="piece" aria-hidden="true"><svg viewBox="0 0 48 48">
+            <path d="M13 18 L35 18 L37.5 41 L10.5 41 Z"/>
+            <path d="M19 18 Q19 9.5 24 9.5 Q29 9.5 29 18"/>
+            <path d="M14.3 22 L33.7 22" stroke-dasharray="2 2.4"/>
+            <rect x="19" y="29" width="10" height="7" rx="1.5" fill="var(--accent)"/>
+          </svg></div>
+          <div class="piece" aria-hidden="true"><svg viewBox="0 0 48 48">
+            <path d="M21 7 L27 7 L27 15 C32 18 33 22 33 26.5 L33 38 Q33 41 30 41 L18 41 Q15 41 15 38 L15 26.5 C15 22 16 18 21 15 Z"/>
+            <rect x="19.5" y="3" width="9" height="4.3" rx="1"/>
+            <rect x="17" y="21" width="14" height="6" rx="1" fill="var(--accent)"/>
+          </svg></div>
+          <div class="piece" aria-hidden="true"><svg viewBox="0 0 48 48">
+            <path d="M13 17 L39 17 L39 29 L35 33 L9 33 L9 21 Z"/>
+            <path d="M14 24 L34 24 M14 28.5 L24 28.5"/>
+            <rect x="30" y="26.3" width="4.4" height="4.4" fill="var(--accent)"/>
+          </svg></div>
+          <div class="piece" aria-hidden="true"><svg viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="12.5"/>
+            <circle cx="24" cy="24" r="9.3" stroke-dasharray="1.6 2.2"/>
+            <path d="M24 17 L25.9 22.1 L31 24 L25.9 25.9 L24 31 L22.1 25.9 L17 24 L22.1 22.1 Z" fill="var(--accent)" stroke="none"/>
+          </svg></div>
+          <div class="piece" aria-hidden="true"><svg viewBox="0 0 48 48">
+            <path d="M14 16 L34 16 L36 41 L12 41 Z"/>
+            <path d="M14 16 L15.5 10.5 L32.5 10.5 L34 16"/>
+            <path d="M18 27 L30 27"/>
+            <circle cx="29" cy="33" r="2.1" fill="var(--accent)"/>
+            <rect x="16.5" y="30.5" width="7" height="5.5" rx="0.8"/>
+          </svg></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process" id="proceso">
+    <div class="wrap process-grid">
+      <div class="process-head">
+        <h2>Así se hace un kit</h2>
+        <p>Tú nos cuentas la ocasión y nosotros nos encargamos del resto.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <div class="mark">
+            <span class="n">1</span>
+            <svg class="ico ico-escribir" viewBox="0 0 64 64" aria-hidden="true">
+              <g transform="translate(-9,0)">
+                <path d="M11 17 L41 11 L48 42 L18 48 Z"/>
+                <path class="l1" d="M16 24.6 L38 20.2"/>
+                <path class="l2" d="M17.4 31.5 L39.4 27.1"/>
+                <path class="l3" d="M18.8 38.4 L32 35.7"/>
+              </g>
+              <!-- Pluma: icono "feather" de Feather Icons (feathericons.com, MIT),
+                   reescalado y colocado aquí tal cual, sin redibujar sus trazos. -->
+              <g class="pluma" transform="translate(43.9,11.4) scale(1.3)">
+                <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" fill="var(--dark)"/>
+                <line x1="16" y1="8" x2="2" y2="22"/>
+                <line x1="17.5" y1="15" x2="9" y2="15"/>
+              </g>
+              <g class="tintero">
+                <path d="M41 44 Q41 41 44.5 41 L48.5 41 Q52 41 52 44 L52 48.5 Q52 51.5 48 51.5 L45 51.5 Q41 51.5 41 48.5 Z"/>
+                <ellipse cx="46.5" cy="41" rx="4.3" ry="1.3"/>
+                <ellipse cx="46.5" cy="41" rx="2.7" ry=".75" fill="var(--dark-accent)"/>
+              </g>
+            </svg>
+          </div>
+          <div>
+            <h3>Nos cuentas el plan</h3>
+            <p>Qué evento o campaña es, en qué fecha, cuántas personas van a recibir el kit y qué quieres que sientan al abrirlo.</p>
+          </div>
+        </li>
+        <li>
+          <div class="mark">
+            <span class="n">2</span>
+            <svg class="ico ico-plano" viewBox="0 0 64 64" aria-hidden="true">
+              <rect x="8" y="7" width="40" height="44" rx="1"/>
+              <path d="M18 7 L18 51 M28 7 L28 51 M38 7 L38 51 M8 17 L48 17 M8 27 L48 27 M8 37 L48 37" opacity=".5" stroke-dasharray="1 2.4"/>
+              <path class="bp-net" d="M20 24 L28 20 L36 24 L28 28 Z M20 24 L20 34 L28 38 L28 28 Z M36 24 L36 34 L28 38 L28 28 Z"/>
+              <g class="bp-detalle">
+                <path d="M30 26 L33 29 M29 29 L32.5 32.5 M28.5 32.5 L31.5 35.8"/>
+                <path d="M14 46 L34 46" stroke-dasharray="1.2 1.8"/>
+                <path d="M14 44.3 L14 47.7 M34 44.3 L34 47.7"/>
+              </g>
+              <g class="bp-check">
+                <circle cx="45" cy="45" r="8" fill="var(--dark)"/>
+                <path d="M41 45 L43.8 47.8 L49.2 41.4"/>
+              </g>
+            </svg>
+          </div>
+          <div>
+            <h3>Te proponemos el kit</h3>
+            <p>Preparamos una propuesta con el contenido, el packaging y el presupuesto, y la ajustamos contigo hasta que encaje.</p>
+          </div>
+        </li>
+        <li>
+          <div class="mark">
+            <span class="n">3</span>
+            <svg class="ico ico-montar" viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M16 28 L16 42 L32 49 L48 42 L48 28"/>
+              <path d="M32 35 L32 49"/>
+              <path d="M16 28 L32 21 L48 28 L32 35 Z"/>
+              <g class="pz pz1" style="--destino:translate(8px,20px) scale(.4)">
+                <path d="M15 5 L16 15 Q16.1 16.5 17.5 16.5 L23.5 16.5 Q24.9 16.5 25 15 L26 5"/>
+                <ellipse cx="20.5" cy="5" rx="5.5" ry="1.7"/>
+                <ellipse cx="20.5" cy="5" rx="3.6" ry="1" fill="var(--dark-accent)"/>
+                <path d="M26 7.5 Q29.5 8 29 10.5 Q28.7 12.5 25.5 13"/>
+              </g>
+              <g class="pz pz2" style="--destino:translate(-6px,19px) scale(.4)">
+                <path d="M35 4 L47 4 L47 16 L35 16 Z"/>
+                <path d="M39 8 L43 8 M39 11.5 L43 11.5"/>
+              </g>
+              <g class="lazo">
+                <path d="M24 24.5 L40 31.5 M40 24.5 L24 31.5 M24 31.5 L24 45.5 M40 31.5 L40 45.5"/>
+                <path d="M32 28 C28 21 22 22 25 26 C26.5 28 30 28.5 32 28 Z" fill="var(--dark)"/>
+                <path d="M32 28 C36 21 42 22 39 26 C37.5 28 34 28.5 32 28 Z" fill="var(--dark)"/>
+                <circle cx="32" cy="28" r="1.7" fill="var(--dark)"/>
+              </g>
+            </svg>
+          </div>
+          <div>
+            <h3>Lo montamos a mano</h3>
+            <p>Cada caja se llena, se cierra y se revisa a mano, una a una.</p>
+          </div>
+        </li>
+        <li>
+          <div class="mark">
+            <span class="n">4</span>
+            <svg class="ico ico-envio" viewBox="0 0 64 64" aria-hidden="true">
+              <g class="mini m1" style="--salto:translate(-24px,0px); animation-delay:0.0s">
+                <g transform="translate(56,34) scale(.32) translate(-32,-28)">
+                  <path d="M16 28 L16 42 L32 49 L48 42 L48 28"/>
+                  <path d="M32 35 L32 49"/>
+                  <path d="M16 28 L32 21 L48 28 L32 35 Z"/>
+                  <path d="M24 24.5 L40 31.5 M40 24.5 L24 31.5 M24 31.5 L24 45.5 M40 31.5 L40 45.5"/>
+                  <path d="M32 28 C28 21 22 22 25 26 C26.5 28 30 28.5 32 28 Z" fill="var(--dark)"/>
+                  <path d="M32 28 C36 21 42 22 39 26 C37.5 28 34 28.5 32 28 Z" fill="var(--dark)"/>
+                  <circle cx="32" cy="28" r="1.7" fill="var(--dark)"/>
+                </g>
+              </g>
+              <g class="mini m2" style="--salto:translate(-17px,17px); animation-delay:0.04s">
+                <g transform="translate(49,17) scale(.32) translate(-32,-28)">
+                  <path d="M16 28 L16 42 L32 49 L48 42 L48 28"/>
+                  <path d="M32 35 L32 49"/>
+                  <path d="M16 28 L32 21 L48 28 L32 35 Z"/>
+                  <path d="M24 24.5 L40 31.5 M40 24.5 L24 31.5 M24 31.5 L24 45.5 M40 31.5 L40 45.5"/>
+                  <path d="M32 28 C28 21 22 22 25 26 C26.5 28 30 28.5 32 28 Z" fill="var(--dark)"/>
+                  <path d="M32 28 C36 21 42 22 39 26 C37.5 28 34 28.5 32 28 Z" fill="var(--dark)"/>
+                  <circle cx="32" cy="28" r="1.7" fill="var(--dark)"/>
+                </g>
+              </g>
+              <g class="mini m3" style="--salto:translate(0px,24px); animation-delay:0.08s">
+                <g transform="translate(32,10) scale(.32) translate(-32,-28)">
+                  <path d="M16 28 L16 42 L32 49 L48 42 L48 28"/>
+                  <path d="M32 35 L32 49"/>
+                  <path d="M16 28 L32 21 L48 28 L32 35 Z"/>
+                  <path d="M24 24.5 L40 31.5 M40 24.5 L24 31.5 M24 31.5 L24 45.5 M40 31.5 L40 45.5"/>
+                  <path d="M32 28 C28 21 22 22 25 26 C26.5 28 30 28.5 32 28 Z" fill="var(--dark)"/>
+                  <path d="M32 28 C36 21 42 22 39 26 C37.5 28 34 28.5 32 28 Z" fill="var(--dark)"/>
+                  <circle cx="32" cy="28" r="1.7" fill="var(--dark)"/>
+                </g>
+              </g>
+              <g class="mini m4" style="--salto:translate(17px,17px); animation-delay:0.12s">
+                <g transform="translate(15,17) scale(.32) translate(-32,-28)">
+                  <path d="M16 28 L16 42 L32 49 L48 42 L48 28"/>
+                  <path d="M32 35 L32 49"/>
+                  <path d="M16 28 L32 21 L48 28 L32 35 Z"/>
+                  <path d="M24 24.5 L40 31.5 M40 24.5 L24 31.5 M24 31.5 L24 45.5 M40 31.5 L40 45.5"/>
+                  <path d="M32 28 C28 21 22 22 25 26 C26.5 28 30 28.5 32 28 Z" fill="var(--dark)"/>
+                  <path d="M32 28 C36 21 42 22 39 26 C37.5 28 34 28.5 32 28 Z" fill="var(--dark)"/>
+                  <circle cx="32" cy="28" r="1.7" fill="var(--dark)"/>
+                </g>
+              </g>
+              <g class="mini m5" style="--salto:translate(24px,0px); animation-delay:0.16s">
+                <g transform="translate(8,34) scale(.32) translate(-32,-28)">
+                  <path d="M16 28 L16 42 L32 49 L48 42 L48 28"/>
+                  <path d="M32 35 L32 49"/>
+                  <path d="M16 28 L32 21 L48 28 L32 35 Z"/>
+                  <path d="M24 24.5 L40 31.5 M40 24.5 L24 31.5 M24 31.5 L24 45.5 M40 31.5 L40 45.5"/>
+                  <path d="M32 28 C28 21 22 22 25 26 C26.5 28 30 28.5 32 28 Z" fill="var(--dark)"/>
+                  <path d="M32 28 C36 21 42 22 39 26 C37.5 28 34 28.5 32 28 Z" fill="var(--dark)"/>
+                  <circle cx="32" cy="28" r="1.7" fill="var(--dark)"/>
+                </g>
+              </g>
+              <g class="mini m6" style="--salto:translate(17px,-17px); animation-delay:0.2s">
+                <g transform="translate(15,51) scale(.32) translate(-32,-28)">
+                  <path d="M16 28 L16 42 L32 49 L48 42 L48 28"/>
+                  <path d="M32 35 L32 49"/>
+                  <path d="M16 28 L32 21 L48 28 L32 35 Z"/>
+                  <path d="M24 24.5 L40 31.5 M40 24.5 L24 31.5 M24 31.5 L24 45.5 M40 31.5 L40 45.5"/>
+                  <path d="M32 28 C28 21 22 22 25 26 C26.5 28 30 28.5 32 28 Z" fill="var(--dark)"/>
+                  <path d="M32 28 C36 21 42 22 39 26 C37.5 28 34 28.5 32 28 Z" fill="var(--dark)"/>
+                  <circle cx="32" cy="28" r="1.7" fill="var(--dark)"/>
+                </g>
+              </g>
+              <g class="mini m7" style="--salto:translate(0px,-24px); animation-delay:0.24s">
+                <g transform="translate(32,58) scale(.32) translate(-32,-28)">
+                  <path d="M16 28 L16 42 L32 49 L48 42 L48 28"/>
+                  <path d="M32 35 L32 49"/>
+                  <path d="M16 28 L32 21 L48 28 L32 35 Z"/>
+                  <path d="M24 24.5 L40 31.5 M40 24.5 L24 31.5 M24 31.5 L24 45.5 M40 31.5 L40 45.5"/>
+                  <path d="M32 28 C28 21 22 22 25 26 C26.5 28 30 28.5 32 28 Z" fill="var(--dark)"/>
+                  <path d="M32 28 C36 21 42 22 39 26 C37.5 28 34 28.5 32 28 Z" fill="var(--dark)"/>
+                  <circle cx="32" cy="28" r="1.7" fill="var(--dark)"/>
+                </g>
+              </g>
+              <g class="mini m8" style="--salto:translate(-17px,-17px); animation-delay:0.28s">
+                <g transform="translate(49,51) scale(.32) translate(-32,-28)">
+                  <path d="M16 28 L16 42 L32 49 L48 42 L48 28"/>
+                  <path d="M32 35 L32 49"/>
+                  <path d="M16 28 L32 21 L48 28 L32 35 Z"/>
+                  <path d="M24 24.5 L40 31.5 M40 24.5 L24 31.5 M24 31.5 L24 45.5 M40 31.5 L40 45.5"/>
+                  <path d="M32 28 C28 21 22 22 25 26 C26.5 28 30 28.5 32 28 Z" fill="var(--dark)"/>
+                  <path d="M32 28 C36 21 42 22 39 26 C37.5 28 34 28.5 32 28 Z" fill="var(--dark)"/>
+                  <circle cx="32" cy="28" r="1.7" fill="var(--dark)"/>
+                </g>
+              </g>
+              <g class="grande">
+                <path d="M16 28 L16 42 L32 49 L48 42 L48 28"/>
+                <path d="M32 35 L32 49"/>
+                <path d="M16 28 L32 21 L48 28 L32 35 Z"/>
+                <text transform="matrix(1 -.4375 0 1 32 35)" x="7.5" y="9" text-anchor="middle" font-family="var(--sans)" font-weight="400" font-size="5.2" fill="var(--on-dark)" stroke="none">OMK!</text>
+              </g>
+            </svg>
+          </div>
+          <div>
+            <h3>Llega a tiempo</h3>
+            <p>Lo entregamos donde haga falta para que esté listo el día de tu evento o el primer día de campaña.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="work" id="proyectos">
+    <div class="wrap">
+      <div class="sec-intro">
+        <h2>Algunos kits</h2>
+        <p>Cada uno se hizo para una ocasión distinta.</p>
+      </div>
+      <div class="work-grid">
+        <figure class="work-item big">
+          <div class="photo"><img src="fotos/zoetis/zoetis-cajas-apiladas.jpg" alt="Varias cajas del kit «Vamos, Go!» apiladas, con el logo de Zoetis"></div>
+          <figcaption><span class="t">Campaña «Vamos, Go!»</span><span class="m">Zoetis · [Año]</span></figcaption>
+        </figure>
+        <figure class="work-item">
+          <div class="photo"><img src="fotos/cbre/cbre-bolsas-apiladas.jpg" alt="Varias bolsas del kit «Por fin nos reencontramos», con el logo de CBRE"></div>
+          <figcaption><span class="t">Kit «Por fin nos reencontramos»</span><span class="m">CBRE · [Año]</span></figcaption>
+        </figure>
+        <figure class="work-item">
+          <div class="photo"><img src="fotos/burger-king/bk-cajas-apiladas.jpg" alt="Varias cajas del kit promocional apiladas, con el logo de Burger King"></div>
+          <figcaption><span class="t">Kit promocional</span><span class="m">Burger King · [Año]</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contacto">
+    <div class="wrap contact-grid">
+      <div class="contact-intro">
+        <h2>Cuéntanos qué tienes entre manos.</h2>
+        <p>Con la fecha, el tipo de evento y cuántas personas lo van a recibir ya podemos preparar una primera propuesta.</p>
+        <p class="direct">¿Prefieres el correo? <a href="mailto:hola@ohmykit.com">hola@ohmykit.com</a></p>
+      </div>
+      <form class="form" id="contact-form">
+        <div class="field">
+          <label for="f-nombre">Nombre</label>
+          <input id="f-nombre" name="nombre" type="text" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="f-empresa">Empresa</label>
+          <input id="f-empresa" name="empresa" type="text" autocomplete="organization">
+        </div>
+        <div class="field full">
+          <label for="f-email">Email de trabajo</label>
+          <input id="f-email" name="email" type="email" autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="f-fecha">Fecha aproximada</label>
+          <input id="f-fecha" name="fecha" type="text" placeholder="Ej. marzo de 2027">
+        </div>
+        <div class="field">
+          <label for="f-cantidad">Número de kits</label>
+          <input id="f-cantidad" name="cantidad" type="text" inputmode="numeric" placeholder="Ej. 150">
+        </div>
+        <div class="field full">
+          <label for="f-mensaje">Cuéntanos más</label>
+          <textarea id="f-mensaje" name="mensaje" placeholder="Tipo de evento, qué te gustaría que llevara, referencias..."></textarea>
+        </div>
+        <div class="form-end">
+          <button class="btn" type="submit"><span>Pedir propuesta</span></button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-top">
+    <span class="brand">Oh My Kit!</span>
+    <a href="mailto:hola@ohmykit.com">hola@ohmykit.com</a>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 Oh My Kit!</span>
+    <ul>
+      <li><a href="#">Aviso legal</a></li>
+      <li><a href="#">Privacidad</a></li>
+      <li><a href="#">Instagram</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('contact-form').addEventListener('submit', function(e){ e.preventDefault(); });
+
+  // --- Montaje del kit ligado al scroll ---------------------------------
+  (function(){
+    var sec = document.querySelector('.build');
+    if(!sec) return;
+    var track  = sec.querySelector('.build-track'),
+        stage  = sec.querySelector('.build-stage'),
+        head   = sec.querySelector('.build-head'),
+        caja   = sec.querySelector('.stage-box'),
+        svg    = sec.querySelector('.box'),
+        piezas = Array.prototype.slice.call(sec.querySelectorAll('.piece')),
+        cara   = sec.querySelector('.solapa-cara'),
+        canto  = sec.querySelector('.solapa-canto'),
+        marca  = sec.querySelector('.marca'),
+        quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Posiciones de salida, normalizadas de -1 a 1 sobre el espacio disponible.
+    // Ya no van esparcidas al azar: están "presentadas", en dos filas ordenadas
+    // (una encima de la caja, otra debajo), con un tilt mínimo de flatlay en vez
+    // de caer girando. Ninguna sale justo por encima de la caja: por ahí se
+    // cierra la solapa.
+    var orig = [[-0.90,-0.90],[-0.30,-0.90],[-1.00,0.88],[-0.50,0.88],[0.00,0.88],
+                [0.50,0.88],[0.30,-0.90],[0.90,-0.90],[1.00,0.88]],
+        giro = [-3,2,-4,3,-2,4,-3,2,-4];
+
+    // Ancho máximo de cada fila: sin tope, en pantallas grandes rx crece mucho
+    // y las piezas quedarían flotando muy separadas en vez de en línea.
+    var LINEA = 180;
+
+    // Espacio libre para las piezas. Se mide una vez y al redimensionar, no en
+    // cada fotograma: son diferencias entre elementos de la escena pegada, así
+    // que no cambian con el scroll.
+    var rx, arriba, abajo, subida, paso;
+    function medir(){
+      caja.style.transform = '';                        // medir sin la subida aplicada
+      var re = stage.getBoundingClientRect(),
+          rh = head.getBoundingClientRect(),
+          rc = caja.getBoundingClientRect(),
+          centro = rc.top + rc.height / 2;
+      rx     = Math.min(stage.clientWidth / 2 - 52, 520);
+      arriba = Math.max(70, centro - rh.bottom - 44);   // sin pisar el titular
+      abajo  = Math.max(70, re.bottom - 28 - centro);
+      // La caja vive por debajo del centro de la escena porque el titular ocupa
+      // la parte de arriba. Esto es lo que le falta para quedar centrada.
+      subida = centro - (re.top + re.height / 2);
+      paso   = caja.clientWidth * 0.72;                 // separación entre kits
+    }
+
+    function limita(v){ return v < 0 ? 0 : v > 1 ? 1 : v; }
+    function suaviza(t){ return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+
+    // Proyección isométrica de la caja: X a la derecha, Y en profundidad, Z
+    // hacia arriba. Medidas de caja de donuts: ancha de planta y poco alta.
+    var ANCHO = 24, FONDO = 24, ALTO = 8,
+        KX = 22 / 24, KY = 9 / 24,          // inclinación isométrica
+        OX = 32, OY = 21;                   // vértice trasero del rombo
+    function proy(X, Y, Z){
+      return [ +(OX + (X - Y) * KX).toFixed(2),
+               +(OY + (X + Y) * KY + (ALTO - Z)).toFixed(2) ];
+    }
+
+    // Solapa con bisagra en la arista trasera derecha, como una caja de donuts:
+    // no se separa de la caja, gira sobre esa arista. Con c=1 cae justo sobre
+    // la boca y su pestaña queda colgando por delante.
+    function dibujaSolapa(c){
+      var ang = (1 - c) * 105 * Math.PI / 180,
+          cos = Math.cos(ang), sen = Math.sin(ang),
+          yl = FONDO * cos,                 ze = ALTO + FONDO * sen,
+          yp = FONDO * cos + 5 * sen,       zp = ALTO + FONDO * sen - 5 * cos,
+          a = proy(0, 0, ALTO),   b = proy(ANCHO, 0, ALTO),
+          d = proy(ANCHO, yl, ze), e = proy(0, yl, ze),
+          f = proy(0, yp, zp),     g = proy(ANCHO, yp, zp);
+      cara.setAttribute('d',  'M' + a + ' L' + b + ' L' + d + ' L' + e + ' Z');
+      canto.setAttribute('d', 'M' + e + ' L' + f + ' L' + g + ' L' + d);
+    }
+
+    // Al final el kit queda rodeado de kits idénticos que llenan toda la escena.
+    // Son clones del mismo SVG con la solapa ya cerrada, colocados en una
+    // retícula isométrica: i avanza por la diagonal descendente y j por la
+    // ascendente (la fila original es j=0). Se crean una vez, y a partir de aquí
+    // NO se puede volver a consultar el DOM con querySelector('.solapa-cara' y
+    // compañía): devolvería el de un clon. Todas las referencias están arriba.
+    // Se recrean en cada resize porque cuántos caben depende del tamaño de escena.
+    var clones = [], repet;
+    function creaClones(){
+      dibujaSolapa(1);                                  // clonar con el kit cerrado
+      if(repet) repet.parentNode.removeChild(repet);
+      clones = [];
+      repet = document.createElement('div');
+      repet.className = 'repeticion';
+      caja.insertBefore(repet, svg);                    // por detrás de la caja real
+
+      // Geometría del estado final (escala 1,5, kit ya en el centro de la escena),
+      // en px relativos al centro del lienzo de la caja. El dibujo ocupa desde el
+      // centro hacia abajo: ancho 44/64 y alto 26/62 del lienzo.
+      var w = caja.clientWidth, S = 1.5,
+          W = stage.clientWidth, H = stage.clientHeight,
+          re = stage.getBoundingClientRect(),
+          bw = w * 44 / 64 * S, bh = w * 26 / 62 * S,
+          lista = [], lineas = [];
+      // Cajas de cada línea de texto del titular (no el rectángulo del bloque,
+      // que es bastante más ancho que el texto).
+      var tw = document.createTreeWalker(head, NodeFilter.SHOW_TEXT), nodo, rg = document.createRange();
+      while((nodo = tw.nextNode())){
+        rg.selectNodeContents(nodo);
+        Array.prototype.forEach.call(rg.getClientRects(), function(r){
+          if(r.width) lineas.push({ l:r.left - re.left - 26, r:r.right - re.left + 26,
+                                    t:r.top - re.top - 26,  b:r.bottom - re.top + 26 });
+        });
+      }
+      function pisaTexto(cx, top){
+        return lineas.some(function(q){
+          return cx + bw / 2 > q.l && cx - bw / 2 < q.r && top + bh > q.t && top < q.b;
+        });
+      }
+      for(var i = -9; i <= 9; i++){
+        for(var j = -9; j <= 9; j++){
+          if(!i && !j) continue;                        // ese es el kit real
+          var dx = (i + j) * paso, dy = (i - j) * paso * 0.409,
+              cx = W / 2 + dx * S, top = H / 2 + dy * S;
+          if(cx + bw / 2 < 0 || cx - bw / 2 > W) continue;      // fuera de la escena
+          if(top + bh < 0 || top > H) continue;
+          if(pisaTexto(cx, top)) continue;                      // sobre el titular
+          lista.push({ i:i, j:j, dx:dx, dy:dy });
+        }
+      }
+      lista.sort(function(a, b){ return a.dy - b.dy; });  // los de delante se pintan encima
+      lista.forEach(function(o){
+        var c = svg.cloneNode(true);
+        c.removeAttribute('style');
+        c.querySelector('.marca').style.opacity = 1;
+        c.style.transform = 'translate(' + o.dx.toFixed(1) + 'px,' + o.dy.toFixed(1) + 'px)';
+        c.dataset.d = Math.abs(o.i) + Math.abs(o.j);    // distancia a la caja real
+        repet.appendChild(c);
+        clones.push(c);
+      });
+    }
+
+    // p: progreso del montaje (0→1 mientras la escena está pegada).
+    // entra: cuánto ha entrado ya la sección siguiente (0→1), es decir, lo que
+    // se ha scrolleado más allá del final del raíl. Las cajas de la retícula
+    // dependen de este segundo valor y no de p: aparecen cuando la sección
+    // siguiente ya está subiendo, no antes.
+    function pinta(p, entra){
+      // La caja se acerca según avanza el scroll, y de paso se desplaza muy
+      // poco de izquierda a derecha.
+      var escala = 0.85 + 0.65 * p,
+          deriva = (p - 0.5) * 2 * (caja.clientWidth * 0.08);
+      svg.style.transform = 'translateX(' + deriva.toFixed(1) + 'px) scale(' + escala.toFixed(3) + ')';
+
+      // El centro de la boca cae 9 unidades por debajo del centro del lienzo, y
+      // se mueve con la escala: si no, las piezas aterrizarían al lado.
+      var destinoY = 0.1406 * caja.clientWidth * escala;
+
+      piezas.forEach(function(el, i){
+        var t = suaviza(limita((p - i * 0.05) / 0.33)),
+            r = orig[i][1] < 0 ? arriba : abajo,
+            x = orig[i][0] * Math.min(rx, LINEA) * (1 - t) + deriva * t,
+            y = orig[i][1] * r  * (1 - t) + destinoY * t,
+            e = 1 - 0.62 * t;
+        el.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' +
+                             (giro[i] * (1 - t)).toFixed(1) + 'deg) scale(' + e.toFixed(3) + ')';
+        el.style.opacity = t > 0.88 ? (1 - (t - 0.88) / 0.12).toFixed(2) : 1;
+      });
+
+      // La solapa se ve levantada desde el principio (así se lee como caja de
+      // donuts) y se cierra cuando ya casi no entran piezas.
+      dibujaSolapa(suaviza(limita((p - 0.70) / 0.16)));
+      marca.style.opacity = limita((p - 0.84) / 0.06);
+
+      // Remate: el kit sube hasta el centro de la escena. Las cajas de alrededor
+      // esperan a que la sección siguiente esté entrando (entra > 0) y salen en
+      // anillos, empezando por las más cercanas al kit real.
+      var sube = suaviza(limita((p - 0.90) / 0.10)),
+          ola  = limita((entra - 0.05) / 0.55);
+      caja.style.transform = 'translateY(' + (-subida * sube).toFixed(1) + 'px)';
+      repet.style.transform = 'translateX(' + deriva.toFixed(1) + 'px) scale(' + escala.toFixed(3) + ')';
+      clones.forEach(function(el){
+        var d = +el.dataset.d,
+            ap = suaviza(limita((ola - (d - 1) * 0.06) / 0.3));
+        el.style.opacity = (ap * Math.max(0.3, 1 - d * 0.08)).toFixed(3);
+      });
+    }
+
+    medir(); creaClones();
+
+    if(quieto){ sec.classList.add('no-anim'); pinta(0, 0); return; }
+
+    var pendiente = false;
+    function alScroll(){
+      if(pendiente) return;
+      pendiente = true;
+      requestAnimationFrame(function(){
+        var r = track.getBoundingClientRect(),
+            total = track.offsetHeight - window.innerHeight;
+        pinta(total > 0 ? limita(-r.top / total) : 0,
+              limita((window.innerHeight - r.bottom) / window.innerHeight));
+        pendiente = false;
+      });
+    }
+    window.addEventListener('scroll', alScroll, { passive:true });
+    window.addEventListener('resize', function(){ medir(); creaClones(); alScroll(); });
+    alScroll();
+  })();
+
+  (function(){
+    var car = document.querySelector('.carousel');
+    if(!car) return;
+    var track  = car.querySelector('.track'),
+        slides = Array.prototype.slice.call(car.querySelectorAll('.slide')),
+        dots   = Array.prototype.slice.call(car.querySelectorAll('.dot')),
+        quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+        i = 0, timer;
+
+    function ir(n){
+      i = (n + slides.length) % slides.length;
+      track.style.transform = 'translateX(-' + (i * 100) + '%)';
+      slides.forEach(function(s, k){ s.setAttribute('aria-hidden', String(k !== i)); });
+      dots.forEach(function(d, k){ d.setAttribute('aria-current', String(k === i)); });
+    }
+    function reiniciar(){
+      clearInterval(timer);
+      if(!quieto) timer = setInterval(function(){ ir(i + 1); }, 5200);
+    }
+    car.querySelector('.prev').addEventListener('click', function(){ ir(i - 1); reiniciar(); });
+    car.querySelector('.next').addEventListener('click', function(){ ir(i + 1); reiniciar(); });
+    dots.forEach(function(d, k){ d.addEventListener('click', function(){ ir(k); reiniciar(); }); });
+    car.addEventListener('mouseenter', function(){ clearInterval(timer); });
+    car.addEventListener('mouseleave', reiniciar);
+    ir(0); reiniciar();
+  })();
+</script>
+</body>
+</html>
