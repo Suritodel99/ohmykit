@@ -221,6 +221,19 @@ El proyecto pasa de vivir solo en local a tener control de versiones real y desp
 - **Dominio `ohmykit.com`:** lo gestiona la compañera del cliente, aparte. Pendiente decirle que cambie el registro DNS de tipo A/CNAME de donde apunta ahora (el WordPress/WooCommerce viejo) a Cloudflare Pages, una vez el sitio esté desplegado allí y tengamos el nombre exacto del registro a crear (Cloudflare lo da al añadir el dominio personalizado en el proyecto de Pages).
 - **Credenciales de GitHub:** se pidió un token personal de acceso para poder hacer `git push` desde este entorno. Un primer intento con un token "fine-grained" falló por permisos (faltaba marcar el repo y poner "Contents: Read and write"); funcionó con un token clásico (`ghp_...`). **Nota de seguridad:** el sistema de permisos del propio entorno bloqueó, correctamente, un intento de guardar ese token de forma permanente en el llavero de macOS por iniciativa propia (sin pedir confirmación) — ese tipo de persistencia la tiene que ejecutar el propio cliente, no el asistente. Pendiente que el cliente revoque el token una vez deje de hacer falta pegarlo en el chat.
 
+### v21 — Revisión de código + formulario de contacto conectado
+Se pidió una revisión de arriba a abajo del proyecto. 6 hallazgos, todos confirmados contra el código real:
+1. **(Resuelto en este mismo v21)** El formulario no enviaba los datos a ningún sitio.
+2. El carrusel del hero no pausa el autoplay si se navega con teclado (solo con ratón) — accesibilidad, pendiente.
+3. El estado `prefers-reduced-motion` del montaje de la caja mide la geometría *antes* de aplicar la clase `no-anim`, así que a veces coloca las piezas mal — pendiente.
+4. El listener de `resize` no tiene debounce: reconstruye los ~361 clones de la retícula final en cada evento de resize — pendiente.
+5. El SVG del icono 4 repite la misma caja 9 veces a mano en vez de un `<symbol>`/`<use>` — limpieza de código, pendiente, sin impacto visual.
+6. Quedó CSS muerto (`.slide .ph`) del placeholder del carrusel que ya no se usa desde que hay fotos reales — limpieza, pendiente.
+
+**Formulario de contacto, resuelto:** conectado a [Web3Forms](https://web3forms.com) (gratis, sin backend propio — es lo único viable en un hosting 100% estático como Cloudflare Pages). El envío es silencioso: JS intercepta el `submit`, hace `fetch` por detrás a la API de Web3Forms, y sustituye el formulario por un mensaje de confirmación sin recargar la página ni abrir el cliente de correo del visitante. Llega por email a **hola@ohmykit.com**. Lleva además un campo honeypot (`botcheck`, oculto) como protección antispam básica.
+
+**La access key de Web3Forms está en claro dentro del HTML** (`<input type="hidden" name="access_key" value="...">`). Esto es por diseño del propio servicio, no un descuido: esa clave solo sirve para *recibir* envíos en la cuenta asociada, no da acceso a nada más, y Web3Forms espera que esté en el frontend. No confundir con un secreto real (como el token de GitHub) que si no debería circular así.
+
 ## 4. Entregables (artifacts publicados)
 
 - **Landing B2B (versión actual, en producción):**
@@ -242,7 +255,7 @@ El proyecto pasa de vivir solo en local a tener control de versiones real y desp
 0. *(Resuelto en v11 y v13: era la ficha de kit del hero, que se cambió por el carrusel, y el mensaje del equipo, que se cambió por el montaje del kit.)*
 1. *(Parcialmente resuelto en v19: fotos reales de 3 clientes ya en el carrusel y la galería.)* Quedan por hacer reales los "suele llevar" del índice de ocasiones (siguen siendo un ejemplo inventado) y confirmar el año de cada campaña (ahora mismo "[Año]" literal).
 2. **Logos de clientes**: siguen siendo texto "[LOGO]" — pendiente de recibirlos (SVG monocromo o PNG con fondo transparente) y de escribir el CSS/HTML para mostrarlos como imagen de verdad.
-3. **Formulario de contacto**: decidir a dónde envía (CRM, email, servicio de formularios). Ahora mismo no envía nada.
+3. ~~Formulario de contacto sin destino.~~ *(Resuelto en v21: envía por Web3Forms a hola@ohmykit.com. Ver v21.)*
 4. **Textos legales**: los enlaces de Aviso legal y Privacidad del pie están vacíos.
 5. Valorar secciones adicionales si hacen falta: casos de éxito, precios orientativos o FAQ.
 6. ~~Arreglar el desbordamiento horizontal en móvil.~~ *(Resuelto en v15: no era un problema de CSS — faltaba `<meta viewport>` y la estructura `<html>/<head>/<body>`. Ver v15.)*

@@ -300,6 +300,10 @@
   .field input::placeholder, .field textarea::placeholder{ color:var(--on-field-soft); opacity:1; }
   .field input:focus, .field textarea:focus{ outline:none; border-bottom-width:3px; padding-bottom:8.5px; }
   .form-end{ grid-column:1 / -1; margin-top:6px; }
+  .form-status{ grid-column:1 / -1; margin-top:4px; font-size:16px; font-weight:600; }
+  .form-status[data-state="error"]{ text-decoration:underline; }
+  .form.is-sent .field, .form.is-sent .form-end{ display:none; }
+  .btn[disabled]{ cursor:default; opacity:.7; }
 
   footer{ background:var(--darkest); color:var(--paper); }
   .foot-top{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; padding-block:64px 40px; }
@@ -743,6 +747,10 @@
         <p class="direct">¿Prefieres el correo? <a href="mailto:hola@ohmykit.com">hola@ohmykit.com</a></p>
       </div>
       <form class="form" id="contact-form">
+        <input type="hidden" name="access_key" value="97016217-4f65-4660-8f2a-9fa0108ea404">
+        <input type="hidden" name="subject" value="Nueva solicitud de propuesta — Oh My Kit">
+        <input type="hidden" name="from_name" value="Formulario de ohmykit.com">
+        <input type="checkbox" name="botcheck" class="botcheck" style="display:none" tabindex="-1" autocomplete="off">
         <div class="field">
           <label for="f-nombre">Nombre</label>
           <input id="f-nombre" name="nombre" type="text" autocomplete="name">
@@ -770,6 +778,7 @@
         <div class="form-end">
           <button class="btn" type="submit"><span>Pedir propuesta</span></button>
         </div>
+        <p class="form-status" id="form-status" role="status" aria-live="polite" hidden></p>
       </form>
     </div>
   </section>
@@ -792,7 +801,50 @@
 </footer>
 
 <script>
-  document.getElementById('contact-form').addEventListener('submit', function(e){ e.preventDefault(); });
+  // --- Envío del formulario de contacto (Web3Forms, sin backend propio) --
+  (function(){
+    var form = document.getElementById('contact-form');
+    if(!form) return;
+    var btn = form.querySelector('button[type="submit"]'),
+        btnSpan = btn.querySelector('span'),
+        status = document.getElementById('form-status'),
+        textoInicial = btnSpan.textContent;
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      btn.disabled = true;
+      btnSpan.textContent = 'Enviando…';
+      status.hidden = true;
+      status.removeAttribute('data-state');
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      })
+        .then(function(r){ return r.json().then(function(data){ return { ok: r.ok, data: data }; }); })
+        .then(function(res){
+          if(res.ok){
+            form.classList.add('is-sent');
+            status.textContent = 'Gracias — hemos recibido tu solicitud. Te escribimos pronto a tu email de trabajo.';
+            status.hidden = false;
+          } else {
+            status.setAttribute('data-state', 'error');
+            status.textContent = 'No se ha podido enviar. Prueba otra vez o escríbenos a hola@ohmykit.com.';
+            status.hidden = false;
+            btn.disabled = false;
+            btnSpan.textContent = textoInicial;
+          }
+        })
+        .catch(function(){
+          status.setAttribute('data-state', 'error');
+          status.textContent = 'No se ha podido enviar. Prueba otra vez o escríbenos a hola@ohmykit.com.';
+          status.hidden = false;
+          btn.disabled = false;
+          btnSpan.textContent = textoInicial;
+        });
+    });
+  })();
 
   // --- Montaje del kit ligado al scroll ---------------------------------
   (function(){
