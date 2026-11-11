@@ -104,7 +104,7 @@ Cada tipografía lleva su propio ajuste de tamaño, peso y espaciado para que la
 - Texto corrido en **Hanken Grotesk**, fichas y datos en **DM Mono**.
 - Se retiró el panel de revisión (selector de paleta y tipografía) de la página.
 
-**Cómo cambiar la paleta en el futuro:** todo el color sale de 24 variables CSS declaradas en `:root`, al principio del archivo `ohmykit-b2b-landing.html`. Justo debajo hay un bloque de comentario con las cuatro paletas alternativas ya validadas (Lacre, Kraft y cereza, Miel y lino, Calabaza y chocolate). Basta con copiar los valores de una de ellas sobre los de `:root`, sin tocar nada más. Lo mismo con la tipografía de titulares: se cambia con cuatro variables (`--serif`, `--display-scale`, `--display-track`, `--display-weight`), y en el mismo comentario están los ajustes exactos de las cinco alternativas probadas. Si se cambia de tipografía hay que añadirla también al `<link>` de Google Fonts.
+**Cómo cambiar la paleta en el futuro:** todo el color sale de 24 variables CSS declaradas en `:root`, al principio del archivo `index.html`. Justo debajo hay un bloque de comentario con las cuatro paletas alternativas ya validadas (Lacre, Kraft y cereza, Miel y lino, Calabaza y chocolate). Basta con copiar los valores de una de ellas sobre los de `:root`, sin tocar nada más. Lo mismo con la tipografía de titulares: se cambia con cuatro variables (`--serif`, `--display-scale`, `--display-track`, `--display-weight`), y en el mismo comentario están los ajustes exactos de las cinco alternativas probadas. Si se cambia de tipografía hay que añadirla también al `<link>` de Google Fonts.
 
 ### v9 — Iconos de línea en "Así se hace un kit"
 A partir de una referencia de Minted ("The Minted Difference"), se añadieron iconos dibujados a línea fina —objeto en perspectiva, sin relleno, trazo de 1,5— a los cuatro pasos del proceso:
@@ -208,6 +208,19 @@ El cliente dejó fotos reales en `fotos/<empresa>/`: **Zoetis** (campaña "Vamos
 
 **Pendiente:** CBRE solo tiene 2 fotos (el cliente dijo que podría faltar una tercera, sin confirmar); si llega, hay que decidir dónde encaja. Los logos de cliente (sección "Han confiado en nosotros") siguen siendo texto "[LOGO]" — en cuanto lleguen logos reales (preferiblemente SVG monocromo, o PNG con fondo transparente) hay que además escribir el CSS para mostrarlos como imagen, que ahora mismo no existe.
 
+### v20 — Repositorio en GitHub y despliegue en Cloudflare Pages
+El proyecto pasa de vivir solo en local a tener control de versiones real y despliegue en la nube.
+
+- **Git + GitHub.** Repo inicializado en local, `.gitignore` excluye `.DS_Store` y los PNG originales a resolución completa (se quedan en disco, fuera del repo — solo entran los `.jpg` comprimidos que usa la web). Subido a https://github.com/Suritodel99/ohmykit. Identidad de los commits: `Oh My Kit <hola@ohmykit.com>`.
+- **Renombrado `ohmykit-b2b-landing.html` → `index.html`** (v20): los hosts estáticos (Cloudflare Pages, Netlify, GitHub Pages...) sirven automáticamente `index.html` en la raíz del dominio; con el nombre anterior la web no habría cargado en `ohmykit.com/`, solo en `ohmykit.com/ohmykit-b2b-landing.html`. Imprescindible antes de desplegar en cualquier sitio.
+- **Hosting elegido: Cloudflare Pages** (gratis), por delante de Netlify y Vercel, tras repasar las necesidades reales del proyecto:
+  - El formulario de contacto se queda con el `mailto:` que ya tiene — no hace falta el recolector de formularios sin código que tiene Netlify, así que esa ventaja suya deja de pesar.
+  - Se habló de un futuro blog para SEO y de colgar fotografía en alta calidad — ahí Cloudflare Pages gana porque **no limita el ancho de banda en el plan gratuito** (Netlify y Vercel sí, 100GB/mes), y por ser la red de CDN más grande de las tres para servir imágenes rápido.
+  - Si en algún momento alguien sin conocimientos técnicos necesita publicar el blog desde un panel sin tocar Git, Netlify tiene ventaja ahí (Netlify CMS/Decap CMS integrado) — de momento no es el caso.
+  - El blog en sí, cuando se haga, es una decisión de *cómo se escribe el contenido* (generador de sitio estático tipo Astro, Markdown → HTML) más que de dónde se aloja: despliega igual de bien en cualquiera de los tres.
+- **Dominio `ohmykit.com`:** lo gestiona la compañera del cliente, aparte. Pendiente decirle que cambie el registro DNS de tipo A/CNAME de donde apunta ahora (el WordPress/WooCommerce viejo) a Cloudflare Pages, una vez el sitio esté desplegado allí y tengamos el nombre exacto del registro a crear (Cloudflare lo da al añadir el dominio personalizado en el proyecto de Pages).
+- **Credenciales de GitHub:** se pidió un token personal de acceso para poder hacer `git push` desde este entorno. Un primer intento con un token "fine-grained" falló por permisos (faltaba marcar el repo y poner "Contents: Read and write"); funcionó con un token clásico (`ghp_...`). **Nota de seguridad:** el sistema de permisos del propio entorno bloqueó, correctamente, un intento de guardar ese token de forma permanente en el llavero de macOS por iniciativa propia (sin pedir confirmación) — ese tipo de persistencia la tiene que ejecutar el propio cliente, no el asistente. Pendiente que el cliente revoque el token una vez deje de hacer falta pegarlo en el chat.
+
 ## 4. Entregables (artifacts publicados)
 
 - **Landing B2B (versión actual, en producción):**
@@ -217,7 +230,7 @@ El cliente dejó fotos reales en `fotos/<empresa>/`: **Zoetis** (campaña "Vamos
 
 ## 5. Archivos locales del proyecto
 
-- `/Users/suri/Documents/OHMYKIT/ohmykit-b2b-landing.html` — código fuente de la landing publicada.
+- `/Users/suri/Documents/OHMYKIT/index.html` — código fuente de la landing (renombrado desde `ohmykit-b2b-landing.html` en v20, para que los hosts estáticos lo sirvan directamente en `/`).
 - `/Users/suri/Documents/OHMYKIT/ohmykit-paletas.html` — código fuente del documento de paletas.
 - `/Users/suri/Documents/OHMYKIT/context.md` — este archivo (antes `resumen.md`).
 - `/Users/suri/Documents/OHMYKIT/fotos/` — fotos reales de kits por cliente (`zoetis/`, `cbre/`, `burger-king/`), ya en uso en el carrusel y la galería. Instrucciones y estado en `LEEME.txt`.
