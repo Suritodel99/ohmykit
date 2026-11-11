@@ -224,11 +224,13 @@ El proyecto pasa de vivir solo en local a tener control de versiones real y desp
 ### v21 — Revisión de código + formulario de contacto conectado
 Se pidió una revisión de arriba a abajo del proyecto. 6 hallazgos, todos confirmados contra el código real:
 1. **(Resuelto en este mismo v21)** El formulario no enviaba los datos a ningún sitio.
-2. El carrusel del hero no pausa el autoplay si se navega con teclado (solo con ratón) — accesibilidad, pendiente.
-3. El estado `prefers-reduced-motion` del montaje de la caja mide la geometría *antes* de aplicar la clase `no-anim`, así que a veces coloca las piezas mal — pendiente.
-4. El listener de `resize` no tiene debounce: reconstruye los ~361 clones de la retícula final en cada evento de resize — pendiente.
-5. El SVG del icono 4 repite la misma caja 9 veces a mano en vez de un `<symbol>`/`<use>` — limpieza de código, pendiente, sin impacto visual.
-6. Quedó CSS muerto (`.slide .ph`) del placeholder del carrusel que ya no se usa desde que hay fotos reales — limpieza, pendiente.
+2. ~~El carrusel del hero no pausaba el autoplay con teclado.~~ *(Resuelto: `focusin`/`focusout` en `.carousel`, igual que ya hacía con `mouseenter`/`mouseleave`.)*
+3. ~~`prefers-reduced-motion` medía la geometría antes de aplicar `no-anim`.~~ *(Resuelto: la clase se añade antes de llamar a `medir()`, no después.)*
+4. ~~El listener de `resize` no tenía debounce.~~ *(Resuelto: 200ms de debounce con `setTimeout`/`clearTimeout` antes de `medir()+creaClones()+alScroll()`.)*
+5. ~~El SVG del icono 4 repetía la misma caja 9 veces a mano.~~ *(Resuelto: la caja-con-lazo de las 8 minis vive una sola vez en `<defs><g id="mini-caja-lazo">` y cada mini la referencia con `<use href="#mini-caja-lazo">`. La caja grande, al no llevar lazo, se queda con sus 3 líneas propias — no había nada que deduplicar ahí.)*
+6. ~~Quedó CSS muerto (`.slide .ph`) del placeholder del carrusel.~~ *(Resuelto: eliminado, ya no hay ningún `.ph` en el HTML desde que hay fotos reales.)*
+
+Los 6 hallazgos de la revisión quedan resueltos.
 
 **Formulario de contacto, resuelto:** conectado a [Web3Forms](https://web3forms.com) (gratis, sin backend propio — es lo único viable en un hosting 100% estático como Cloudflare Pages). El envío es silencioso: JS intercepta el `submit`, hace `fetch` por detrás a la API de Web3Forms, y sustituye el formulario por un mensaje de confirmación sin recargar la página ni abrir el cliente de correo del visitante. Llega por email a **hola@ohmykit.com**. Lleva además un campo honeypot (`botcheck`, oculto) como protección antispam básica.
 
